@@ -1,0 +1,305 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Oregon Ldo";
+  src: url("/fonts/OregonLdo-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oregon Ldo";
+  src: url("/fonts/OregonLdo-Ultrablack.ttf") format("truetype");
+  font-weight: 950;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oregon Ldo";
+  src: url("/fonts/OregonLdo-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oregon Ldo";
+  src: url("/fonts/OregonLdo-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oregon Ldo";
+  src: url("/fonts/OregonLdo-Book.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oregon Ldo";
+  src: url("/fonts/OregonLdo-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme inline {
+  --color-background: #ffffff;
+  --color-foreground: #111215;
+  --color-muted: #6b7280;
+  --color-muted-light: #9ca3af;
+  --color-accent: #d97706;
+  --color-accent-hover: #b45309;
+  --color-accent-red: #dc2626;
+  --color-border: #e5e7eb;
+  --color-surface: #f9fafb;
+  --color-dark: #0a0a0a;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Courier New", monospace;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-heading: "Oregon Ldo", ui-sans-serif, system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+.font-firs {
+  font-family: "TT Firs Neue", "Inter", system-ui, sans-serif;
+}
+
+/* ─── Selection ────────────────────────────── */
+::selection {
+  background: #d9770620;
+  color: var(--color-foreground);
+}
+
+/* ─── Link transitions ──────────────────────── */
+a {
+  transition: color 0.18s ease;
+}
+
+/* ─── Line clamp utilities ──────────────────── */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ─── Ticker animation ──────────────────────── */
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 35s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Fade in up ────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+/* ─── Reading progress bar ──────────────────── */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--color-accent);
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* ─── Section header accent ─────────────────── */
+.section-header {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 1.125rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-accent);
+  margin-bottom: 1.25rem;
+  display: inline-block;
+}
+
+/* ─── Article card hover title ──────────────── */
+.article-title-hover {
+  transition: color 0.18s ease;
+}
+
+.article-title-hover:hover {
+  color: var(--color-muted);
+}
+
+/* ─── Category pill on image ────────────────── */
+.cat-pill {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 2px;
+}
+
+/* ─── Image placeholder gradients by category ── */
+.cat-gradient-vulnerability    { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+.cat-gradient-malware          { background: linear-gradient(135deg, #2d1b1b 0%, #3d1c1c 50%, #5c2020 100%); }
+.cat-gradient-data-breach      { background: linear-gradient(135deg, #1f1f1f 0%, #2d2d2d 50%, #3c1f1f 100%); }
+.cat-gradient-ai-innovation    { background: linear-gradient(135deg, #1a1a2e 0%, #1e1e4e 50%, #2d2d7e 100%); }
+.cat-gradient-cloud-security   { background: linear-gradient(135deg, #0d2137 0%, #0e3554 50%, #0f4a72 100%); }
+.cat-gradient-zero-day         { background: linear-gradient(135deg, #2a0a0a 0%, #3d0f0f 50%, #6b1a1a 100%); }
+.cat-gradient-cyber-policy     { background: linear-gradient(135deg, #111827 0%, #1e2a3a 50%, #1f3a5f 100%); }
+.cat-gradient-research         { background: linear-gradient(135deg, #1a1a3e 0%, #22225e 50%, #2c2c7e 100%); }
+.cat-gradient-infosec          { background: linear-gradient(135deg, #111a11 0%, #1a2b1a 50%, #1f3f1f 100%); }
+.cat-gradient-industry         { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #3d3d3d 100%); }
+
+/* ─── Prose article body ────────────────────── */
+.article-prose {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: #1f2937;
+}
+
+.article-prose p {
+  margin-bottom: 1.25rem;
+}
+
+.article-prose h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: #111215;
+}
+
+.article-prose h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #111215;
+}
+
+.article-prose ul, .article-prose ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.article-prose li {
+  margin-bottom: 0.4rem;
+}
+
+.article-prose strong {
+  color: #111215;
+  font-weight: 700;
+}
+
+.article-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  background: #f3f4f6;
+  color: #dc2626;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+.article-prose em {
+  font-style: italic;
+  color: #374151;
+}
+
+.article-prose pre, .article-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 6px;
+  padding: 0.2em 0.4em;
+}
+
+.article-prose pre {
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin-bottom: 1.25rem;
+}
+
+.article-prose pre code {
+  background: transparent;
+  padding: 0;
+}
+
+/* ─── Search overlay ──────────────────────── */
+.search-overlay {
+  animation: fadeInUp 0.2s ease forwards;
+}
+
+/* ─── Severity bar ─────────────────────────── */
+.severity-bar {
+  height: 3px;
+  border-radius: 2px;
+}
