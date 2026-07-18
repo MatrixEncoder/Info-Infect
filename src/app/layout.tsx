@@ -34,17 +34,31 @@ export const metadata: Metadata = {
   title: "Info-Infect | Cybersecurity News & Intelligence",
   description:
     "Your MUCH needed INFECTION — real-time cybersecurity news, vulnerability tracking, threat intelligence and infosec research.",
+  metadataBase: new URL("https://infoinfect.dpdns.org"),
   openGraph: {
     title: "Info-Infect | Cybersecurity News & Intelligence",
     description:
       "Real-time cybersecurity news, vulnerability tracking, and threat intelligence.",
-    type: "website",
+    url: "https://infoinfect.dpdns.org",
     siteName: "Info-Infect",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Info-Infect — Cybersecurity News & Intelligence",
+      },
+    ],
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Info-Infect | Cybersecurity News & Intelligence",
     description: "Real-time cybersecurity news and threat intelligence.",
+    images: ["/og-image.png"],
+  },
+  icons: {
+    icon: "/icon.png",
   },
 };
 

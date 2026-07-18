@@ -31,6 +31,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: article.title,
       description: article.excerpt,
       type: "article",
+      url: `https://infoinfect.dpdns.org/news/${article.slug}`,
+      images: article.thumbnail_url
+        ? [{ url: article.thumbnail_url, width: 1200, height: 630, alt: article.title }]
+        : [{ url: "/og-image.png", width: 1200, height: 630, alt: article.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.excerpt,
+      images: article.thumbnail_url ? [article.thumbnail_url] : ["/og-image.png"],
     },
   };
 }
