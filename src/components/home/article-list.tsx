@@ -37,7 +37,7 @@ export function ArticleList({ articles }: ArticleListProps) {
               </span>
 
               {/* Title */}
-              <h3 className="text-[17px] font-extrabold leading-snug text-gray-900 article-title-hover group-hover:text-gray-500 mb-2 line-clamp-2"
+              <h3 className="text-[15px] sm:text-[17px] font-extrabold leading-snug text-gray-900 article-title-hover group-hover:text-gray-500 mb-2 line-clamp-2"
                 style={{ fontFamily: "var(--font-heading)" }}>
                 {article.title}
               </h3>

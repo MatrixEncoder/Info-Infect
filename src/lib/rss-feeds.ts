@@ -60,7 +60,7 @@ const FEEDS: FeedSource[] = [
 
 let cachedArticles: Article[] = [];
 let lastFetchTime = 0;
-const CACHE_DURATION_MS = 15 * 60 * 1000; // 15 minutes
+const CACHE_DURATION_MS = 10 * 60 * 1000; // 10 minutes
 
 // ─── Helpers ────────────────────────────────────────────────────
 
@@ -163,6 +163,7 @@ export async function fetchOgImage(url: string): Promise<string | null> {
         Accept: "text/html",
       },
       signal: AbortSignal.timeout(5000),
+      cache: "no-store",
     });
 
     if (!res.ok) {
@@ -197,8 +198,8 @@ async function fetchFeed(source: FeedSource): Promise<Article[]> {
         "User-Agent": "Info-Infect/1.0 (Cybersecurity News Aggregator; +https://info-infect.com)",
         Accept: "application/rss+xml, application/xml, text/xml",
       },
-      signal: AbortSignal.timeout(5000),
-      next: { revalidate: 300 },
+      signal: AbortSignal.timeout(8000),
+      cache: "no-store",
     });
 
     if (!res.ok) return [];

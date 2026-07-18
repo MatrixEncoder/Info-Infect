@@ -7,6 +7,8 @@ import { Activity, Shield, AlertTriangle } from "lucide-react";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Info-Infect | Cybersecurity News & Intelligence",
   description:
@@ -55,7 +57,7 @@ async function FeedContent({ cat }: { cat?: string }) {
             </div>
 
             <div className="border-y border-gray-100 py-3 mb-8">
-              <div className="flex items-center gap-6 text-[11.5px] text-gray-500 flex-wrap">
+              <div className="flex items-center gap-3 sm:gap-6 text-[10.5px] sm:text-[11.5px] text-gray-500 flex-wrap">
                 <div className="flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
                   <Activity className="h-3.5 w-3.5 text-green-600" />
@@ -64,7 +66,7 @@ async function FeedContent({ cat }: { cat?: string }) {
                 <div className="flex items-center gap-1.5">
                   <Shield className="h-3.5 w-3.5 text-amber-600" />
                   <span>
-                    <span className="font-semibold text-gray-700">{allArticles.length}</span> articles loaded
+                    <span className="font-semibold text-gray-700">{allArticles.length}</span> articles
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5">
@@ -73,7 +75,7 @@ async function FeedContent({ cat }: { cat?: string }) {
                     <span className="font-semibold text-red-600">
                       {allArticles.filter((a) => a.cves.length > 0).length}
                     </span>{" "}
-                    CVEs tracked
+                    CVEs
                   </span>
                 </div>
                 <div className="ml-auto hidden sm:block">

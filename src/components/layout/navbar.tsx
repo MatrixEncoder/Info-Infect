@@ -39,10 +39,10 @@ export function Navbar() {
       className={`sticky top-0 z-50 bg-black transition-shadow duration-200 ${scrolled ? "shadow-lg" : ""}`}
     >
       {/* ── Main bar ── */}
-      <div className="max-w-[1280px] mx-auto flex items-center h-[80px] px-4 sm:px-6 gap-4">
+      <div className="max-w-[1280px] mx-auto flex items-center h-[64px] sm:h-[80px] px-3 sm:px-6 gap-2 sm:gap-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 shrink-0 mr-6">
-          <div className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-lg">
+        <Link href="/" className="flex items-center gap-2 sm:gap-3 shrink-0 sm:mr-6">
+          <div className="relative h-[44px] w-[44px] sm:h-[72px] sm:w-[72px] shrink-0 overflow-hidden rounded-lg">
             <Image src="/logo.png" alt="Info-Infect" fill sizes="72px" className="object-contain opacity-80" priority />
           </div>
           <div className="hidden sm:flex flex-col leading-none">

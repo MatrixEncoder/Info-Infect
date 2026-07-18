@@ -5,8 +5,11 @@ import { fetchAllFeeds } from "@/lib/rss-feeds";
 import { renderMarkdown } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import { ReadingProgress } from "@/components/article/reading-progress";
+import { ShareViewBar } from "@/components/article/share-view-bar";
 import type { Metadata } from "next";
 import type { ArticleCategory } from "@/lib/types";
+
+export const dynamic = "force-dynamic";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -84,7 +87,7 @@ export default async function ArticlePage({ params }: Props) {
               </div>
 
               <h1
-                className="text-3xl sm:text-4xl lg:text-[2.6rem] font-black leading-tight text-gray-900 mb-5"
+                className="text-[1.6rem] sm:text-3xl lg:text-4xl xl:text-[2.6rem] font-black leading-tight text-gray-900 mb-5"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 {article.title}
@@ -142,8 +145,8 @@ export default async function ArticlePage({ params }: Props) {
             />
 
             {/* Source attribution */}
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-8">
-              <div className="flex items-start justify-between gap-4 flex-wrap">
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 sm:p-5 mb-8">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                 <div>
                   <p className="text-sm font-semibold text-gray-700 mb-1">
                     Originally published by {article.source_name}
@@ -163,7 +166,7 @@ export default async function ArticlePage({ params }: Props) {
                   href={article.source_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-white border border-gray-300 hover:border-gray-400 text-gray-700 text-xs font-semibold rounded-lg transition-colors shrink-0"
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-white border border-gray-300 hover:border-gray-400 text-gray-700 text-xs font-semibold rounded-lg transition-colors shrink-0 sm:w-auto w-full"
                 >
                   Read on {article.source_name}
                   <ExternalLink className="h-3 w-3" />
@@ -207,8 +210,9 @@ export default async function ArticlePage({ params }: Props) {
               </div>
             )}
 
-            {/* CTA */}
-            <div className="flex items-center gap-3 pt-5 border-t border-gray-100">
+            {/* Share + Views + CTA */}
+            <ShareViewBar slug={article.slug} title={article.title} />
+            <div className="flex items-center gap-3 mt-4 flex-wrap">
               <a
                 href={article.source_url}
                 target="_blank"

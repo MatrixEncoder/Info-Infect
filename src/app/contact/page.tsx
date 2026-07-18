@@ -9,15 +9,15 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <section className="bg-[#0a0a0a] text-white py-24 px-4">
+      <section className="bg-[#0a0a0a] text-white py-16 sm:py-24 px-4">
         <div className="max-w-[800px] mx-auto text-center">
           <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-xs font-bold tracking-widest uppercase mb-6">
             Contact
           </span>
-          <h1 className="font-heading text-4xl sm:text-5xl font-black leading-tight mb-6">
+          <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-black leading-tight mb-6">
             Get in Touch
           </h1>
-          <p className="text-lg text-gray-400 leading-relaxed max-w-[500px] mx-auto">
+          <p className="text-base sm:text-lg text-gray-400 leading-relaxed max-w-[500px] mx-auto">
             Have a tip, feedback, or partnership inquiry? We&apos;d love to hear from you.
           </p>
         </div>

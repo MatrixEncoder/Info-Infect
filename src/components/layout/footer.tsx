@@ -101,7 +101,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="max-w-[1200px] mx-auto px-4 sm:px-6 pb-10 mt-12">
+    <footer className="max-w-[1200px] mx-auto px-4 sm:px-6 pb-10 mt-12 overflow-hidden">
 
       {/* ── Grid wrapper ── */}
       <div
@@ -112,9 +112,9 @@ export function Footer() {
         <div
           className="relative flex flex-col justify-between overflow-hidden"
           style={{
-            minHeight: 400,
+            minHeight: 280,
             borderRadius: 28,
-            padding: 32,
+            padding: 24,
             boxShadow: "0 12px 40px rgba(21,76,189,0.25)",
             background: "#1e4fc0",
           }}
@@ -136,7 +136,7 @@ export function Footer() {
 
           {/* Logo */}
           <div style={{ position: "relative", zIndex: 1 }}>
-            <div className="relative w-full h-[280px] overflow-hidden rounded-2xl">
+            <div className="relative w-full h-[160px] sm:h-[280px] overflow-hidden rounded-2xl">
               <Image src="/logo_foot.png" alt="Info-Infect" fill sizes="350px" className="object-contain opacity-90" />
             </div>
           </div>
@@ -155,6 +155,7 @@ export function Footer() {
             style={{ position: "relative", zIndex: 1 }}
           >
             <span
+              className="hidden sm:inline"
               style={{
                 fontFamily: "var(--font-caveat), cursive",
                 fontSize: 17,
@@ -209,93 +210,13 @@ export function Footer() {
           style={{
             background: "#f0f1f5",
             borderRadius: 28,
-            padding: 40,
-            overflow: "visible",
+            padding: "20px",
             boxShadow: "0 4px 20px rgba(0,0,0,0.04)",
           }}
         >
-          {/* Floating LinkedIn */}
-          <div
-            className="linkedin-badge"
-            style={{
-              position: "absolute",
-              top: -36,
-              right: 40,
-              zIndex: 10,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              gap: 6,
-            }}
-          >
-            <a
-              href="https://www.linkedin.com/in/suryansh-srivastava-746113292"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                width: 96,
-                height: 96,
-                borderRadius: 22,
-                transform: "rotate(-10deg)",
-                background: "linear-gradient(135deg, #0077b5 0%, #005e93 55%, #004578 100%)",
-                boxShadow:
-                  "inset 3px 3px 8px rgba(255,255,255,0.25), inset -3px -3px 12px rgba(0,0,0,0.18), 8px 14px 28px rgba(0,94,147,0.35)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                textDecoration: "none",
-                transition: "transform 0.2s, box-shadow 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "rotate(-10deg) translateY(-3px)";
-                e.currentTarget.style.boxShadow =
-                  "inset 3px 3px 8px rgba(255,255,255,0.25), inset -3px -3px 12px rgba(0,0,0,0.18), 8px 18px 36px rgba(0,94,147,0.45)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "rotate(-10deg)";
-                e.currentTarget.style.boxShadow =
-                  "inset 3px 3px 8px rgba(255,255,255,0.25), inset -3px -3px 12px rgba(0,0,0,0.18), 8px 14px 28px rgba(0,94,147,0.35)";
-              }}
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="#fff"
-                style={{ width: 40, height: 40, transform: "rotate(10deg)" }}
-              >
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/suryansh-srivastava-746113292"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5"
-              style={{ transform: "rotate(-4deg)", marginTop: 4, textDecoration: "none" }}
-            >
-              <span style={{ width: 22, height: 22, color: "#9ca3af" }}>
-                <svg viewBox="0 0 24 24">
-                  <path d="M3 20 C 6 14, 10 9, 18 5" stroke="currentColor" fill="none" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M18 5 L 12 5" stroke="currentColor" fill="none" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M18 5 L 18 11" stroke="currentColor" fill="none" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-caveat), cursive",
-                  fontSize: 20,
-                  fontWeight: 600,
-                  color: "#9ca3af",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                Connect on LinkedIn
-              </span>
-            </a>
-          </div>
-
           {/* Nav columns */}
           <div style={{ paddingTop: 8 }}>
-            <div className="flex flex-row" style={{ gap: 72 }}>
+            <div className="flex flex-row flex-wrap" style={{ gap: "40px" }}>
               {navColumns.map((col) => (
                 <div key={col.title}>
                   <div
@@ -336,8 +257,8 @@ export function Footer() {
 
           {/* Bottom row */}
           <div
-            className="footer-bottom-row flex flex-row items-end justify-between"
-            style={{ marginTop: 48 }}
+            className="footer-bottom-row flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6"
+            style={{ marginTop: 32 }}
           >
             <span style={{ fontSize: 12.5, fontWeight: 500, color: "#9ca3af" }}>
               &copy; 2026 Info-Infect. All rights reserved.
@@ -350,9 +271,10 @@ export function Footer() {
                 </strong>
               </h4>
               <div
-                className="subscribe-row flex flex-row"
+                className="subscribe-row flex flex-col sm:flex-row gap-2"
                 style={{
-                  width: 310,
+                  width: "100%",
+                  maxWidth: 340,
                   background: "#fff",
                   border: "1px solid #e5e7eb",
                   borderRadius: 12,
@@ -367,7 +289,7 @@ export function Footer() {
                   onChange={(e) => { setEmail(e.target.value); setEmailError(false); }}
                   onKeyDown={(e) => e.key === "Enter" && handleSubscribe()}
                   suppressHydrationWarning
-                  className="flex-1 bg-transparent border-none outline-none"
+                  className="flex-1 min-w-0 bg-transparent border-none outline-none"
                   style={{
                     padding: "11px 14px",
                     fontSize: 13.5,
@@ -380,12 +302,12 @@ export function Footer() {
                   type="button"
                   onClick={handleSubscribe}
                   suppressHydrationWarning
-                  className="inline-flex items-center gap-[7px] cursor-pointer whitespace-nowrap border-none"
+                  className="inline-flex items-center justify-center gap-[5px] cursor-pointer whitespace-nowrap border-none shrink-0"
                   style={{
-                    padding: "11px 22px",
+                    padding: "11px 20px",
                     background: "#111214",
                     color: "#fff",
-                    fontSize: 13.5,
+                    fontSize: 13,
                     fontWeight: 600,
                     borderRadius: 8,
                     boxShadow: "0 6px 20px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.15)",
@@ -411,7 +333,7 @@ export function Footer() {
                     strokeWidth={2.5}
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    style={{ width: 14, height: 14 }}
+                    style={{ width: 13, height: 13 }}
                   >
                     <line x1="5" y1="12" x2="19" y2="12" />
                     <polyline points="12 5 19 12 12 19" />
@@ -422,9 +344,77 @@ export function Footer() {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* ── Watermark ── */}
+        {/* Floating LinkedIn — positioned relative to grid wrapper */}
+        <div
+          className="linkedin-badge absolute z-10 hidden md:flex flex-col items-start"
+          style={{ top: -36, right: 40, gap: 6 }}
+        >
+          <a
+            href="https://www.linkedin.com/in/suryansh-srivastava-746113292"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              width: 96,
+              height: 96,
+              borderRadius: 22,
+              transform: "rotate(-10deg)",
+              background: "linear-gradient(135deg, #0077b5 0%, #005e93 55%, #004578 100%)",
+              boxShadow:
+                "inset 3px 3px 8px rgba(255,255,255,0.25), inset -3px -3px 12px rgba(0,0,0,0.18), 8px 14px 28px rgba(0,94,147,0.35)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              textDecoration: "none",
+              transition: "transform 0.2s, box-shadow 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "rotate(-10deg) translateY(-3px)";
+              e.currentTarget.style.boxShadow =
+                "inset 3px 3px 8px rgba(255,255,255,0.25), inset -3px -3px 12px rgba(0,0,0,0.18), 8px 18px 36px rgba(0,94,147,0.45)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "rotate(-10deg)";
+              e.currentTarget.style.boxShadow =
+                "inset 3px 3px 8px rgba(255,255,255,0.25), inset -3px -3px 12px rgba(0,0,0,0.18), 8px 14px 28px rgba(0,94,147,0.35)";
+            }}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="#fff"
+              style={{ width: 40, height: 40, transform: "rotate(10deg)" }}
+            >
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/suryansh-srivastava-746113292"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5"
+            style={{ transform: "rotate(-4deg)", marginTop: 4, textDecoration: "none" }}
+          >
+            <span style={{ width: 22, height: 22, color: "#9ca3af" }}>
+              <svg viewBox="0 0 24 24">
+                <path d="M3 20 C 6 14, 10 9, 18 5" stroke="currentColor" fill="none" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M18 5 L 12 5" stroke="currentColor" fill="none" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M18 5 L 18 11" stroke="currentColor" fill="none" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <span
+              style={{
+                fontFamily: "var(--font-caveat), cursive",
+                fontSize: 20,
+                fontWeight: 600,
+                color: "#9ca3af",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Connect on LinkedIn
+            </span>
+          </a>
+        </div>
+      </div>
       <div
         aria-hidden="true"
         style={{
@@ -441,7 +431,7 @@ export function Footer() {
           ref={svgRef}
           viewBox="0 0 1000 200"
           preserveAspectRatio="xMidYMid meet"
-          style={{ display: "block", width: "100%", height: "auto", overflow: "visible" }}
+          style={{ display: "block", width: "100%", height: "auto", overflow: "hidden" }}
         >
           <text
             ref={textRef}
@@ -484,10 +474,10 @@ export function Footer() {
           .linkedin-badge { right: 12px !important; top: -28px !important; }
         }
         @media (max-width: 560px) {
-          .linkedin-badge > a:first-child { width: 72px !important; height: 72px !important; }
-          .linkedin-badge > a:first-child svg { width: 30px !important; height: 30px !important; }
-          .footer-bottom-row { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
-          .subscribe-row { width: 100% !important; }
+          .linkedin-badge > a:first-child { width: 64px !important; height: 64px !important; border-radius: 16px !important; }
+          .linkedin-badge > a:first-child svg { width: 26px !important; height: 26px !important; }
+          .linkedin-badge > a:last-child span:last-child { font-size: 16px !important; }
+          .subscribe-row { max-width: 100% !important; }
         }
       `}</style>
 

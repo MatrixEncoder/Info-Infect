@@ -56,7 +56,7 @@ export function HeroSection({ articles }: HeroProps) {
   return (
     <section className="border-b border-gray-200 pb-8 mb-0">
       <Link href={`/news/${featured.slug}`} className="group block">
-        <ArticleImage article={featured} className="aspect-[21/9] w-full rounded-sm mb-5">
+        <ArticleImage article={featured} className="aspect-video sm:aspect-[21/9] w-full rounded-sm mb-5">
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
           <div className="absolute bottom-4 left-4 flex gap-1.5">
             <span className="cat-pill">{CATEGORY_LABELS[featured.category]}</span>
@@ -65,7 +65,7 @@ export function HeroSection({ articles }: HeroProps) {
             )}
           </div>
         </ArticleImage>
-        <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-black leading-tight text-gray-900 article-title-hover group-hover:text-gray-500 mb-3"
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-[2.5rem] font-black leading-tight text-gray-900 article-title-hover group-hover:text-gray-500 mb-3"
           style={{ fontFamily: "var(--font-heading)" }}>
           {featured.title}
         </h2>
