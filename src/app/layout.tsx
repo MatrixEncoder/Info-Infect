@@ -4,13 +4,7 @@ import { Inter, Playfair_Display, Caveat } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { BreakingTicker } from "@/components/layout/ticker";
-import { startBackgroundRefresh } from "@/lib/background-refresh";
 import "./globals.css";
-
-// Start background refresh on server startup
-if (typeof window === "undefined") {
-  startBackgroundRefresh();
-}
 
 const inter = Inter({
   subsets: ["latin"],

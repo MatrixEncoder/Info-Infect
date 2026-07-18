@@ -60,7 +60,7 @@ const FEEDS: FeedSource[] = [
 
 let cachedArticles: Article[] = [];
 let lastFetchTime = 0;
-const CACHE_DURATION_MS = 10 * 60 * 1000; // 10 minutes
+const CACHE_DURATION_MS = 5 * 60 * 1000; // 5 minutes
 
 // ─── Helpers ────────────────────────────────────────────────────
 
@@ -251,9 +251,14 @@ async function fetchFeed(source: FeedSource): Promise<Article[]> {
 
 export async function fetchAllFeeds(forceRefresh = false): Promise<Article[]> {
   const now = Date.now();
+
+  // Always return cache if fresh enough (unless forced)
   if (!forceRefresh && cachedArticles.length > 0 && now - lastFetchTime < CACHE_DURATION_MS) {
+    console.log(`[feeds] Cache HIT — ${cachedArticles.length} articles, age ${Math.round((now - lastFetchTime) / 1000)}s`);
     return cachedArticles;
   }
+
+  console.log(`[feeds] Fetching fresh from ${FEEDS.filter(f => f.enabled).length} sources...`);
 
   const enabledFeeds = FEEDS.filter((f) => f.enabled);
   const results = await Promise.allSettled(enabledFeeds.map(fetchFeed));
@@ -291,6 +296,8 @@ export async function fetchAllFeeds(forceRefresh = false): Promise<Article[]> {
 
   cachedArticles = unique;
   lastFetchTime = now;
+
+  console.log(`[feeds] Fresh fetch complete — ${unique.length} articles, newest: ${unique[0]?.title?.slice(0, 60)}`);
 
   return unique;
 }

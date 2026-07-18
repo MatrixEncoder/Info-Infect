@@ -101,7 +101,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="max-w-[1200px] mx-auto px-4 sm:px-6 pb-10 mt-12 overflow-x-hidden">
+    <footer className="max-w-[1200px] mx-auto px-4 sm:px-6 pb-10 mt-12" style={{ overflowX: "clip" }}>
 
       {/* ── Grid wrapper ── */}
       <div
