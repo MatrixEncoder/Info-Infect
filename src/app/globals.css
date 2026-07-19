@@ -306,6 +306,15 @@ a {
   border-radius: 2px;
 }
 
+/* ─── Hide scrollbar ────────────────────────── */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 /* ─── Mobile optimizations ──────────────────── */
 @media (max-width: 640px) {
   html {
