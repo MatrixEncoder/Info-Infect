@@ -24,20 +24,22 @@ const socials = [
 
 const navColumns = [
   {
-    title: "Navigation",
+    title: "Intelligence",
     links: [
       { label: "Home", href: "/" },
+      { label: "Daily Brief", href: "/daily-brief" },
       { label: "Threat Feed", href: "/?cat=infosec" },
-      { label: "CVE Tracker", href: "/?cat=vulnerability" },
-      { label: "Data Breaches", href: "/?cat=data-breach" },
-      { label: "Categories", href: "/?cat=ai-innovation" },
+      { label: "Exploit Tracker", href: "/exploits" },
+      { label: "Threat Actors", href: "/threat-actors" },
+      { label: "Malware Analysis", href: "/malware" },
     ],
   },
   {
-    title: "Company",
+    title: "Resources",
     links: [
+      { label: "Tools & Research", href: "/tools" },
+      { label: "CVE Watchlist", href: "/watchlist" },
       { label: "About", href: "/about" },
-      { label: "Blog", href: "/blog" },
       { label: "Contact", href: "/contact" },
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms of Service", href: "/terms" },

@@ -6,14 +6,16 @@ import { useState, useEffect, useRef } from "react";
 import { Search, Menu, X, Bell } from "lucide-react";
 
 const categories = [
+  { label: "DAILY BRIEF", href: "/daily-brief" },
   { label: "NEWS", href: "/?cat=infosec" },
   { label: "VULNERABILITIES", href: "/?cat=vulnerability" },
-  { label: "MALWARE", href: "/?cat=malware" },
+  { label: "EXPLOITS", href: "/exploits" },
+  { label: "THREAT ACTORS", href: "/threat-actors" },
+  { label: "MALWARE", href: "/malware" },
   { label: "AI SECURITY", href: "/?cat=ai-innovation" },
   { label: "CLOUD", href: "/?cat=cloud-security" },
-  { label: "DATA BREACH", href: "/?cat=data-breach" },
-  { label: "POLICY", href: "/?cat=cyber-policy" },
-  { label: "RESEARCH", href: "/?cat=research" },
+  { label: "TOOLS", href: "/tools" },
+  { label: "WATCHLIST", href: "/watchlist" },
 ];
 
 export function Navbar() {
