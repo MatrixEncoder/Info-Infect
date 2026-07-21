@@ -152,39 +152,55 @@ export async function fetchOgImage(url: string): Promise<string | null> {
   const cached = ogImageCache.get(url);
   const ts = ogCacheTimestamps.get(url) ?? 0;
 
-  if (cached !== undefined && now - ts < OG_CACHE_TTL) {
+  // Return cached if fresh (but skip caching nulls — retry on next request)
+  if (cached !== null && cached !== undefined && now - ts < OG_CACHE_TTL) {
     return cached;
   }
 
   try {
     const res = await fetch(url, {
       headers: {
-        "User-Agent": "Info-Infect/1.0 (og:image fetcher)",
+        "User-Agent": "Mozilla/5.0 (compatible; Info-Infect/1.0; +https://infoinfect.dpdns.org)",
         Accept: "text/html",
       },
-      signal: AbortSignal.timeout(5000),
+      signal: AbortSignal.timeout(4000),
       cache: "no-store",
     });
 
-    if (!res.ok) {
-      ogImageCache.set(url, null);
-      ogCacheTimestamps.set(url, now);
-      return null;
+    if (!res.ok) return null;
+
+    // Stream only first 16KB to avoid downloading full pages
+    const reader = res.body?.getReader();
+    const decoder = new TextDecoder();
+    let html = "";
+    if (reader) {
+      for (let i = 0; i < 3; i++) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        html += decoder.decode(value, { stream: true });
+        // Stop early if we found og:image
+        if (html.includes("og:image")) break;
+      }
+      reader.cancel();
+    } else {
+      html = await res.text().then((t) => t.slice(0, 16384));
     }
 
-    const html = await res.text();
-    // Extract og:image from meta tags
-    const ogMatch = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)
-      || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i)
-      || html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i);
+    // Multiple regex patterns for different sites
+    const ogMatch =
+      html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) ||
+      html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i) ||
+      html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i) ||
+      html.match(/<meta[^>]+name=["']twitter:image:src["'][^>]+content=["']([^"']+)["']/i) ||
+      html.match(/<link[^>]+rel=["']image_src["'][^>]+href=["']([^"']+)["']/i);
 
     const imgUrl = ogMatch ? ogMatch[1] : null;
-    ogImageCache.set(url, imgUrl);
-    ogCacheTimestamps.set(url, now);
+    if (imgUrl) {
+      ogImageCache.set(url, imgUrl);
+      ogCacheTimestamps.set(url, now);
+    }
     return imgUrl;
   } catch {
-    ogImageCache.set(url, null);
-    ogCacheTimestamps.set(url, now);
     return null;
   }
 }
@@ -278,14 +294,17 @@ export async function fetchAllFeeds(forceRefresh = false): Promise<Article[]> {
   // Sort by date
   unique.sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
 
-  // Apply og:image fallback to articles without thumbnails (top 40 only)
-  const withoutImages = unique.filter((a) => !a.thumbnail_url).slice(0, 40);
-  await Promise.allSettled(
-    withoutImages.map(async (a) => {
-      const og = await fetchOgImage(a.source_url);
-      if (og) a.thumbnail_url = og;
-    })
-  );
+  // Apply og:image fallback to ALL articles without thumbnails (in batches of 20)
+  const withoutImages = unique.filter((a) => !a.thumbnail_url);
+  for (let i = 0; i < withoutImages.length; i += 20) {
+    const batch = withoutImages.slice(i, i + 20);
+    await Promise.allSettled(
+      batch.map(async (a) => {
+        const og = await fetchOgImage(a.source_url);
+        if (og) a.thumbnail_url = og;
+      })
+    );
+  }
 
   // If RSS failed completely, fall back to mock articles
   if (unique.length === 0 && cachedArticles.length === 0) {

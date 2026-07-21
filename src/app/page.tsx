@@ -1,6 +1,7 @@
 import { HeroSection } from "@/components/home/hero-section";
 import { ArticleList } from "@/components/home/article-list";
 import { Sidebar } from "@/components/home/sidebar";
+import { CveAlerts } from "@/components/home/cve-alerts";
 import { ParallaxSection } from "@/components/home/parallax-section";
 import { fetchAllFeeds } from "@/lib/rss-feeds";
 import { Activity, Shield, AlertTriangle } from "lucide-react";
@@ -17,24 +18,28 @@ export const metadata: Metadata = {
 
 function FeedLoading() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_320px] gap-10 pb-16">
-      <div className="space-y-6">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <div key={i} className="flex gap-5 py-5 border-b border-gray-100 animate-pulse">
-            <div className="flex-1 space-y-3">
-              <div className="h-3 w-20 bg-gray-200 rounded" />
-              <div className="h-5 w-3/4 bg-gray-200 rounded" />
-              <div className="h-4 w-full bg-gray-100 rounded" />
-              <div className="h-3 w-1/3 bg-gray-100 rounded" />
+    <div className="lg:grid lg:grid-cols-[1fr_300px] pb-16">
+      <div className="max-w-[980px] px-4 sm:px-6 lg:px-0 lg:ml-auto lg:mr-0 lg:pr-8">
+        <div className="space-y-6">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div key={i} className="flex gap-5 py-5 border-b border-gray-100 animate-pulse">
+              <div className="flex-1 space-y-3">
+                <div className="h-3 w-20 bg-gray-200 rounded" />
+                <div className="h-5 w-3/4 bg-gray-200 rounded" />
+                <div className="h-4 w-full bg-gray-100 rounded" />
+                <div className="h-3 w-1/3 bg-gray-100 rounded" />
+              </div>
+              <div className="w-[130px] h-[90px] bg-gray-200 rounded-sm shrink-0" />
             </div>
-            <div className="w-[130px] h-[90px] bg-gray-200 rounded-sm shrink-0" />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-      <div className="space-y-4">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="h-24 bg-gray-100 rounded-lg animate-pulse" />
-        ))}
+      <div className="hidden lg:block pr-4">
+        <div className="space-y-4">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="h-24 bg-gray-100 rounded-lg animate-pulse" />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -93,6 +98,8 @@ async function FeedContent({ cat }: { cat?: string }) {
               </div>
             </div>
 
+            <CveAlerts />
+
             <ArticleList articles={articles} />
           </>
         }
@@ -110,10 +117,8 @@ export default async function HomePage({
   const { cat } = await searchParams;
 
   return (
-    <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
-      <Suspense fallback={<FeedLoading />}>
-        <FeedContent cat={cat} />
-      </Suspense>
-    </div>
+    <Suspense fallback={<FeedLoading />}>
+      <FeedContent cat={cat} />
+    </Suspense>
   );
 }
