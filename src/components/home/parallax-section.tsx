@@ -8,8 +8,8 @@ interface ParallaxSectionProps {
 
 export function ParallaxSection({ leftEdge, center, rightEdge }: ParallaxSectionProps) {
   return (
-    <div className="lg:grid lg:grid-cols-[220px_1fr_280px] pb-16">
-      <div className="hidden lg:block pl-4 sm:pl-6">
+    <div className="lg:grid lg:grid-cols-[340px_1fr_280px] pb-16">
+      <div className="hidden lg:block px-4 sm:px-5 border-r border-gray-100">
         <div
           style={{ position: "sticky", top: 100, maxHeight: "calc(100vh - 120px)", overflowY: "auto" }}
         >

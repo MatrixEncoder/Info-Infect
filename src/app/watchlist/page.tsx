@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Eye, Bell, Trash2, Plus } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Eye, Bell, Trash2, Plus, Mail } from "lucide-react";
 
 interface WatchItem {
   type: "cve" | "vendor";
@@ -11,17 +11,34 @@ interface WatchItem {
 export default function WatchlistPage() {
   const [inputType, setInputType] = useState<"cve" | "vendor">("cve");
   const [inputValue, setInputValue] = useState("");
+  const [email, setEmail] = useState("");
+  const [showEmailField, setShowEmailField] = useState(false);
   const [watchlistItems, setWatchlistItems] = useState<WatchItem[]>([]);
   const [toastMsg, setToastMsg] = useState("");
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (showEmailField && emailRef.current) {
+      emailRef.current.focus();
+    }
+  }, [showEmailField]);
 
   async function handleAdd() {
     if (!inputValue.trim()) return;
+
+    if (!email.trim()) {
+      setShowEmailField(true);
+      setTimeout(() => emailRef.current?.focus(), 100);
+      return;
+    }
+
     try {
       const res = await fetch("/api/watchlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           action: "add",
+          email: email.trim(),
           type: inputType,
           value: inputValue.trim(),
         }),
@@ -43,11 +60,12 @@ export default function WatchlistPage() {
   }
 
   async function handleRemove(type: string, value: string) {
+    if (!email.trim()) return;
     try {
       await fetch("/api/watchlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "remove", type, value }),
+        body: JSON.stringify({ action: "remove", email: email.trim(), type, value }),
       });
       setWatchlistItems((prev) =>
         prev.filter((item) => !(item.type === type && item.value === value))
@@ -72,8 +90,24 @@ export default function WatchlistPage() {
             <p className="text-[13px] text-gray-500">
               Track CVEs and vendors. Get notified when new vulnerabilities drop.
             </p>
+            </div>
+            {/* Email field */}
+            <div className={`mt-3 transition-all duration-200 ${showEmailField || email.trim() ? "opacity-100 max-h-16" : "opacity-0 max-h-0 overflow-hidden"}`}>
+              <div className="flex gap-3 items-center">
+                <Mail className="h-4 w-4 text-gray-400 shrink-0" />
+                <input
+                  ref={emailRef}
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleAdd()}
+                  placeholder="your@email.com (for notifications)"
+                  className="flex-1 border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-amber-500 transition-colors"
+                  autoComplete="email"
+                />
+              </div>
+            </div>
           </div>
-        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10">

@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 
 function FeedLoading() {
   return (
-    <div className="lg:grid lg:grid-cols-[220px_1fr_280px] pb-16">
-      <div className="hidden lg:block pl-4">
+    <div className="lg:grid lg:grid-cols-[340px_1fr_280px] pb-16">
+      <div className="hidden lg:block px-4 sm:px-5 border-r border-gray-100">
         <div className="space-y-3">
           {[1, 2, 3].map((i) => (
             <div key={i} className="h-16 bg-red-50 rounded animate-pulse" />
@@ -67,6 +67,10 @@ async function FeedContent({ cat }: { cat?: string }) {
           <>
             <div className="py-6">
               <HeroSection articles={articles} />
+            </div>
+
+            <div className="lg:hidden mb-6">
+              <CveAlerts />
             </div>
 
             <div className="border-y border-gray-100 py-3 mb-8">
