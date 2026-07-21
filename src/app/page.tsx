@@ -18,8 +18,15 @@ export const metadata: Metadata = {
 
 function FeedLoading() {
   return (
-    <div className="lg:grid lg:grid-cols-[1fr_300px] pb-16">
-      <div className="max-w-[980px] px-4 sm:px-6 lg:px-0 lg:ml-auto lg:mr-0 lg:pr-8">
+    <div className="lg:grid lg:grid-cols-[220px_1fr_280px] pb-16">
+      <div className="hidden lg:block pl-4">
+        <div className="space-y-3">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="h-16 bg-red-50 rounded animate-pulse" />
+          ))}
+        </div>
+      </div>
+      <div className="px-4 sm:px-6 lg:px-0 lg:mx-auto lg:w-full lg:max-w-[720px]">
         <div className="space-y-6">
           {[1, 2, 3, 4, 5].map((i) => (
             <div key={i} className="flex gap-5 py-5 border-b border-gray-100 animate-pulse">
@@ -55,7 +62,8 @@ async function FeedContent({ cat }: { cat?: string }) {
   return (
     <>
       <ParallaxSection
-        left={
+        leftEdge={<CveAlerts />}
+        center={
           <>
             <div className="py-6">
               <HeroSection articles={articles} />
@@ -98,12 +106,10 @@ async function FeedContent({ cat }: { cat?: string }) {
               </div>
             </div>
 
-            <CveAlerts />
-
             <ArticleList articles={articles} />
           </>
         }
-        right={<Sidebar articles={articles} />}
+        rightEdge={<Sidebar articles={articles} />}
       />
     </>
   );
